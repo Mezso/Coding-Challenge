@@ -28,6 +28,7 @@ test.beforeEach(async ({ page }) => {
     const homePage = new HomePage(page);
 
     await homePage.goto(testData.url);
+    await page.waitForLoadState('load');
   });
 
 test('Navigate to the Spree Commerce demo store',async({page})=>{
@@ -88,9 +89,9 @@ test('Create account', async ({ page }) => {
                 await category.SelectSize(product.size);
                 }
             
-            await page.waitForTimeout(300);
+            
             await category.AddQuantity(product.qty);
-
+            
             await category.AddtoCart();
             await category.CloseCart();
         }

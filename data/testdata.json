@@ -3,12 +3,12 @@
   "title": "Spree Commerce",
   "user": [
     {
-      "email": "testuser_1753109554282@mail.com",
+      "email": "testuser_1753128431424@mail.com",
       "password": "123456789",
       "country": "Philippines",
       "firstName": "Mang",
       "lastName": "Jose",
-      "address": "123 cubao",
+      "address": "555 test st",
       "city": "Quezon city",
       "postal": "1850"
     }
@@ -35,7 +35,7 @@
       "qty": 3,
       "category": "Wellness",
       "unitPrice": "45.99",
-      "size": "M"
+      "size": "L"
     }
   ],
   "delivery": [

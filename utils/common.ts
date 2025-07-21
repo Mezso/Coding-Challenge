@@ -113,7 +113,7 @@ export async function smartClick(page: Page, options: ClickOptions) {
           throw new Error(`Unsupported selector type: ${type}`);
       }
     }
-
+    element = element.first();
     await element.waitFor({ state: 'visible', timeout });
     await element.scrollIntoViewIfNeeded();
     await element.click();
@@ -229,7 +229,9 @@ export async function smartGet(page: Page, options: GetOptions): Promise<Locator
       case 'css':
         if (typeof value !== 'string') throw new Error('CSS selector must be a string');
         return page.locator(value);
-        
+      case 'testid':
+        if (typeof value !== 'string') throw new Error('Test ID must be a string');
+        return page.getByTestId(value);
       case 'text':
         if (typeof value !== 'string') throw new Error('CSS selector must be a string');
         return page.getByText(value);

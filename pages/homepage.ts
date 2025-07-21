@@ -16,8 +16,10 @@ export class HomePage {
   async clickAccountButton() {
     
     await Common.smartClick(this.page, {
-        type: 'xpath',
-        value: '//div[contains(@class, "justify-end")]//button[contains(@data-action, "slideover-account#toggle")]'
+        type: 'role',
+        roleName:'link',
+        value:'My Account'
+        //value: '//div[contains(@class, "justify-end")]//button[contains(@data-action, "slideover-account#toggle")]'
     });
   }
   async clickCartButton() {
