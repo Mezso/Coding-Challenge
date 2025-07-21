@@ -1,4 +1,24 @@
 import { Locator, Page } from '@playwright/test';
+import fs from 'fs';
+
+function generateRandomEmail() {
+  return `testuser_${Date.now()}@mail.com`;
+}
+
+export function updateTestDataEmail(filePath: string) {
+  const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const newEmail = generateRandomEmail();
+
+  data.user[0].email = newEmail;
+
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+  return newEmail;
+}
+
+export function getTestData(filePath: string): any {
+  return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+}
+
 
 type SelectorType = 'xpath' | 'role' | 'text' | 'css' | 'testid';
 
@@ -227,3 +247,4 @@ export async function retry<T>(fn: () => Promise<T>, retries = 3, delay = 500): 
   }
   throw lastError;
 }
+

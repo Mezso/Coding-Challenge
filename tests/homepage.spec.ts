@@ -2,11 +2,18 @@ import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/homepage.ts';
 import { Category } from '../pages/categorypage.ts';
 import { Checkout } from '../pages/checkoutpage.ts';
-import testData from '../data/testdata.json';
+import * as Common from '../utils/common';
+
+let testData: any;
 
 test.describe.configure({ mode: 'serial' });
 test.setTimeout(60000)
 test.describe('Product link checks on homepage', () => {
+test.beforeAll(() => {
+  Common.updateTestDataEmail('data/testdata.json');
+ testData = Common.getTestData('data/testdata.json');
+});
+
 
 test.beforeEach(async ({ page }) => {
      // ✅ Maximize the browser window (Chromium only)
