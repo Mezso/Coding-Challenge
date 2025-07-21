@@ -3,6 +3,7 @@ import { HomePage } from '../pages/homepage.ts';
 import { Category } from '../pages/categorypage.ts';
 import { Checkout } from '../pages/checkoutpage.ts';
 import * as Common from '../utils/common';
+import path from 'path';
 
 let testData: any;
 
@@ -10,8 +11,9 @@ test.describe.configure({ mode: 'serial' });
 test.setTimeout(60000)
 test.describe('Product link checks on homepage', () => {
 test.beforeAll(() => {
-  Common.updateTestDataEmail('data/testdata.json');
- testData = Common.getTestData('data/testdata.json');
+    const testDataPath = path.resolve('data/testdata.json');
+    Common.updateTestDataEmail('data/testdata.json');
+    testData = Common.getTestData('data/testdata.json');
 });
 
 

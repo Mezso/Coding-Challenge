@@ -1,22 +1,44 @@
 import { Locator, Page } from '@playwright/test';
 import fs from 'fs';
+import path from 'path';
 
 function generateRandomEmail() {
   return `testuser_${Date.now()}@mail.com`;
 }
 
-export function updateTestDataEmail(filePath: string) {
-  const data = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+export function updateTestDataEmail(filePath: string): string {
+  const resolvedPath = path.resolve(filePath);
+
+  if (!fs.existsSync(resolvedPath)) {
+    throw new Error(`Test data file not found at: ${resolvedPath}`);
+  }
+
+  const rawData = fs.readFileSync(resolvedPath, 'utf-8');
+  const data = JSON.parse(rawData);
   const newEmail = generateRandomEmail();
 
-  data.user[0].email = newEmail;
+  // Update only if different
+  if (data.user?.[0]?.email !== newEmail) {
+    data.user[0].email = newEmail;
+    fs.writeFileSync(resolvedPath, JSON.stringify(data, null, 2));
 
-  fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
+    console.log(`[testdata] Updated email to ${newEmail}`);
+  } else {
+    console.log(`[testdata] Email already up to date`);
+  }
+
   return newEmail;
 }
 
 export function getTestData(filePath: string): any {
-  return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  const resolvedPath = path.resolve(filePath);
+
+  if (!fs.existsSync(resolvedPath)) {
+    throw new Error(`Test data file not found at: ${resolvedPath}`);
+  }
+
+  const rawData = fs.readFileSync(resolvedPath, 'utf-8');
+  return JSON.parse(rawData);
 }
 
 
