@@ -38,7 +38,7 @@ export default defineConfig({
     {
       name: 'chromium',
       use: {  browserName: 'chromium',
-              headless: false,
+              headless: true,
               viewport: null, // This allows the window to be maximized to full screen
        },
       
