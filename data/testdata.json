@@ -1,0 +1,59 @@
+{
+    "url": "https://demo.spreecommerce.org/",
+    "title": "Spree Commerce",
+    "user":[
+    {
+        "email": "testmain8@mail.com",
+        "password": "123456789",
+        "country": "Philippines",
+        "firstName": "Mang",
+        "lastName": "Jose",
+        "address": "123 cubao",
+        "city": "Quezon city",
+        "postal": "1850"
+    }
+    ],
+    "payment":[
+    {
+        "cardType":"card",
+        "paymentMethod": "Stripe",
+        "cardNo":"4242 4242 4242 4242",
+        "expiryDate":"10/29",
+        "securityCode":"143"
+    }    
+    ],   
+    "products": [
+    {
+      "name": "Rose Gold Watch",
+      "qty": 2,
+      "category": "Fashion",
+      "unitPrice": "209.99",
+      "size":""
+    },
+    {
+      "name": "Black Gym Pants",
+      "qty": 3,
+      "category": "Wellness",
+      "unitPrice": "45.99",
+      "size":"M"
+    }
+    ],
+  "delivery":[
+    {
+        "method":"Standard",
+        "deliveryDay":"Delivery in 3-5 business days",
+        "price":"$5.00"    
+    },
+    {
+        "method":"Premium",
+        "deliveryDay":"Delivery in 2-3 business days",
+        "price":"$10.00"    
+    },
+    {
+        "method":"Next Day",
+        "deliveryDay":"Delivery in 1-2 business days",
+        "price":"$15.00"    
+    }
+
+  ]
+}
