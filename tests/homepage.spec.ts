@@ -133,6 +133,7 @@ test('Create account', async ({ page }) => {
                 shippingAddress.lastName,
                 shippingAddress.address,
                 shippingAddress.city,
+                shippingAddress.state,
                 shippingAddress.postal);
         }
         

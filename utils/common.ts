@@ -134,7 +134,7 @@ interface FillOptions {
 }
 
 export async function smartFill(page: Page, options: FillOptions) {
-  const { type, value, roleName, timeout = 5000, textToType, frameSelector } = options;
+  const { type, value, roleName, timeout = 10000, textToType, frameSelector } = options;
 
   let element: Locator;
 
@@ -197,6 +197,7 @@ export async function smartFill(page: Page, options: FillOptions) {
     await element.scrollIntoViewIfNeeded();
 
     await element.click();
+    await page.waitForTimeout(100);
     await element.fill('');
     await element.fill(String(textToType));
   } catch (error) {

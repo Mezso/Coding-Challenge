@@ -38,14 +38,24 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: {  browserName: 'chromium',
-              actionTimeout: 10000,
-              headless: true,
-              viewport: { width: 1920, height: 1080 },
-              launchOptions: {
-                args: ['--disable-gpu','--window-size=1920,1080'],      // Set browser window size to fullscreen
-              },
-              video :'on'
+        use: {
+          browserName: 'chromium',
+          headless: true, // Still headless for CI
+          viewport: { width: 1920, height: 1080 },
+          userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36',
+
+          launchOptions: {
+            args: [
+              '--disable-gpu',
+              '--window-size=1920,1080',
+              '--no-sandbox',
+              '--disable-dev-shm-usage'
+            ],
+            slowMo: 100
+          },
+
+          video: 'on',
+          actionTimeout: 10000,
                // This allows the window to be maximized to full screen
        },
       

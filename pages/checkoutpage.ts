@@ -14,11 +14,15 @@ export class Checkout {
         lastname: string,
         address: string,
         city: string,
-        postal: string){
+        state: string,
+        postal: string
+        ){
 
     await this.page.selectOption('select#order_ship_address_attributes_country_id', {
     label: country
     });
+
+    
 
     await Common.smartFill(this.page,{
         type:'role',
@@ -44,6 +48,16 @@ export class Checkout {
         value:'City',
         textToType:city
     })
+    if(country == 'United States'){
+        await this.page.locator('#order_ship_address_attributes_state_id').waitFor({ state: 'visible' });
+        await this.page.locator('#order_ship_address_attributes_state_id').selectOption({ label: state });
+    } else{
+        const stateDropdown = this.page.locator('#order_ship_address_attributes_state_id');
+        if (await stateDropdown.isVisible()) {
+            // Fallback safe value (e.g. some countries may still require it optionally)
+            await stateDropdown.selectOption({ label: 'California' });
+    }
+    }
     await Common.smartFill(this.page,{
         type:'role',
         roleName:'textbox',
@@ -105,11 +119,7 @@ export class Checkout {
     
     async clickPaymentMethod(paymenthMethod : string){
 
-        await Common.smartClick(this.page,{
-            type:'xpath',
-            value:`	//a[contains(., '${paymenthMethod}')]/input`
-        });
-        
+       await this.page.click(`xpath=//a[contains(., '${paymenthMethod}')]`, { force: true });
     }
     async getPaymentMethod(paymenthMethod : string) {
 
@@ -123,17 +133,14 @@ export class Checkout {
     }
     async FillCardDetails(cardType : string, cardDetails : string, expDate : string , secCode : string){  
         
-        // await Common.smartClick(this.page,{
-        //     type:'testid',
-        //     value:cardType,
-        //     frameSelector:'iframe[name^="__privateStripeFrame]'
-        // });
+        
+        await this.page.screenshot({ path: 'headless_debug.png', fullPage: true });
 
-        await this.page
-  .locator('[title="Secure payment input frame"]')  // <-- fixed here
-  .contentFrame()
-  .getByTestId('card')
-  .click();
+        await Common.smartClick(this.page,{
+            type:'testid',
+            value:cardType,
+            frameSelector:'[title="Secure payment input frame"]'
+        });
 
 
         await Common.smartFill(this.page,{

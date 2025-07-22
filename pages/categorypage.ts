@@ -12,7 +12,7 @@ async ClickProduct(product : string){
         value: product
     });
 
-    await expect(this.page.getByRole('heading', { name: product })).toBeVisible();
+    await expect(this.page.locator(`xpath=//div[contains(@data-controller,'sticky-button')]//h1[contains(text(),'${product}')]`)).toBeVisible();
 
 }
 async AddQuantity(quantity : number){

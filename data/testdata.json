@@ -3,11 +3,12 @@
   "title": "Spree Commerce",
   "user": [
     {
-      "email": "testuser_1753128431424@mail.com",
+      "email": "testuser_1753176975167@mail.com",
       "password": "123456789",
-      "country": "Philippines",
       "firstName": "Mang",
       "lastName": "Jose",
+      "country": "Philippines",
+      "state": "",
       "address": "555 test st",
       "city": "Quezon city",
       "postal": "1850"
